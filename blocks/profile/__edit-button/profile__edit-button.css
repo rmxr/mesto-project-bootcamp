@@ -8,3 +8,7 @@
   background-position: center;
   align-self: baseline;
 }
+
+.profile__edit-button:hover {
+  opacity: .6;
+}

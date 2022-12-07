@@ -1,0 +1,11 @@
+.cards__like-button {
+  align-self: baseline;
+  display: inline-block;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/__like-button.svg);
+}
+
+.cards__like-button:hover {
+  opacity: .5;
+}
