@@ -9,4 +9,17 @@
   row-gap: 20px;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
+  justify-items: center;
+}
+
+@media screen and (max-width: 880px) {
+  .cards__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 581px) {
+  .cards__container {
+    grid-template-columns: 1fr;
+  }
 }

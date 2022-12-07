@@ -6,10 +6,16 @@
   height: 33px;
 }
 
-/* @media screen and (max-width: 767px) {
+@media screen and (max-width: 881px) {
+  .logo {
+    margin-left: 27px;
+  }
+}
+
+@media screen and (max-width: 581px) {
   .logo {
     background-image: url(../../images/__logo_small.svg);
-    width: 142px;
-    height: 42px;
+    height: 24.396305084228516px;
+    width: 103.7361831665039px;
   }
-} */
+}

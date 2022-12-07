@@ -7,3 +7,12 @@
   align-self: baseline;
   margin: 0;
 }
+
+@media screen and (max-width: 440px) {
+  .profile__name {
+    font-size: 27px;
+    line-height: 33px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+}

@@ -5,5 +5,20 @@
   letter-spacing: 0em;
   text-align: left;
   margin: 0;
+}
 
+@media screen and (max-width: 710px) {
+  .profile__description {
+    text-align: center;
+
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .profile__description {
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0em;
+
+  }
 }
