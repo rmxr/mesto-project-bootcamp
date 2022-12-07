@@ -12,13 +12,13 @@
   justify-items: center;
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 900px) {
   .cards__container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media screen and (max-width: 581px) {
+@media screen and (max-width: 595px) {
   .cards__container {
     grid-template-columns: 1fr;
   }

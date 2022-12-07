@@ -1,13 +1,24 @@
 .profile__info {
   display: inline-grid;
+  grid-template-areas: "name name button" "description description empty";
   grid-template-columns: max-content max-content;
   grid-template-rows: max-content max-content;
   column-gap: 18px;
   row-gap: 16px;
 }
 
+@media screen and (max-width: 710px) {
+  .profile__info {
+    grid-template-areas: "spacer name button" "spacer description empty";
+    grid-template-columns: 24px max-content max-content;
+
+  }
+}
+
+
 @media screen and (max-width: 440px) {
   .profile__info {
+    grid-template-columns: 18px max-content max-content;
     row-gap: 14px;
     column-gap: 10px;
   }

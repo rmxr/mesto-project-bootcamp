@@ -1,4 +1,5 @@
 .profile__edit-button {
+  grid-area: button;
   box-sizing: border-box;
   width: 24px;
   height: 24px;
@@ -7,6 +8,7 @@
   background-repeat: no-repeat;
   background-position: center;
   align-self: baseline;
+  transition: opacity .1s;
 }
 
 .profile__edit-button:hover {
