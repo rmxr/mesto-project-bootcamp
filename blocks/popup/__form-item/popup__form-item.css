@@ -1,0 +1,13 @@
+.popup__form-item {
+  border: none;
+  font-family: inherit;
+  display: block;
+  margin: 0 auto 0;
+  min-width: 358px;
+}
+
+@media screen and (max-width: 550px) {
+  .popup__form-item {
+    min-width: 238px;
+  }
+}
