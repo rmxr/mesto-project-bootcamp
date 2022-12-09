@@ -1,4 +1,5 @@
 .profile__edit-button {
+  background-color: transparent;
   cursor: pointer;
   grid-area: button;
   box-sizing: border-box;

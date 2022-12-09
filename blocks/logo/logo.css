@@ -1,5 +1,4 @@
 .logo {
-  background-image: url(../../images/__logo.svg);
   margin: 0;
   padding: 0;
   width: 142px;
@@ -14,7 +13,6 @@
 
 @media screen and (max-width: 581px) {
   .logo {
-    background-image: url(../../images/__logo_small.svg);
     height: 24.396305084228516px;
     width: 103.7361831665039px;
   }

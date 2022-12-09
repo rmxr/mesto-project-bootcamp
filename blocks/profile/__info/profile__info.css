@@ -1,5 +1,5 @@
 .profile__info {
-  display: inline-grid;
+  display: grid;
   grid-template-areas: "name name button" "description description empty";
   grid-template-columns: max-content max-content;
   grid-template-rows: max-content max-content;
