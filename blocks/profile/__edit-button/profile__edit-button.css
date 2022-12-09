@@ -1,4 +1,5 @@
 .profile__edit-button {
+  cursor: pointer;
   grid-area: button;
   box-sizing: border-box;
   width: 24px;

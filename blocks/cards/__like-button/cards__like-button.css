@@ -1,4 +1,5 @@
 .cards__like-button {
+  cursor: pointer;
   align-self: baseline;
   display: inline-block;
   width: 22px;
