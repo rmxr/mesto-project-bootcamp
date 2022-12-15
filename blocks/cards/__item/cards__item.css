@@ -1,4 +1,5 @@
 .cards__item {
+  position: relative;
   background-color: white;
   width: 282px;
   min-height: 361px;
