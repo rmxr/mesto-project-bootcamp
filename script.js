@@ -63,6 +63,7 @@ function populateCards(cardsArray) {
 };
 
 function openImageView(e) {
+  if (document.querySelector(".view-image")) {document.querySelector(".view-image").remove()};
   const imageViewElement = imageViewTemplate.querySelector(".view-image").cloneNode(true);
   const closeButton = imageViewElement.querySelector(".view-image__close-button");
   imageViewElement.querySelector(".view-image__image").src = e.currentTarget.src;
@@ -71,7 +72,8 @@ function openImageView(e) {
     imageViewElement.classList.remove("popup_opened");
   });
   body.append(imageViewElement);
-  setTimeout(imageViewElement.classList.add("popup_opened"), 3000);
+  imageViewElement.getBoundingClientRect();
+  imageViewElement.classList.add("popup_opened");
 }
 
 populateCards(initialCards);
