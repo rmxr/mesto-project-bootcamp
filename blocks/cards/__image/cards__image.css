@@ -1,4 +1,5 @@
 .cards__image {
+  display: block;
   cursor: pointer;
   object-fit: cover;
   width: 282px;
