@@ -41,42 +41,39 @@
   </footer>
 
   <!-- Profile edit popup -->
-  <div class="profile-edit popup">
-    <div class="profile-edit__container popup__container">
-      <button class="profile-edit__close-button popup__close-button" type="button"></button>
-      <p class="profile-edit__caption popup__caption">Редактировать профиль</p>
-      <form class="profile-edit__form popup__form" name="edit-profile" action="#">
-        <input class="profile-edit__form-item profile-edit__form-item_name popup__form-item popup__form-item_name"
-          type="text" name="name" value="">
-        <input
-          class="profile-edit__form-item profile-edit__form-item_description popup__form-item popup__form-item_description"
-          type="text" name="description" value="">
-        <button class="profile-edit__save-button popup__save-button" type="submit">Сохранить</button>
+  <div class="popup popup_function_edit">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <p class="popup__caption">Редактировать профиль</p>
+      <form class="popup__form popup__form_function_edit" name="edit-profile" action="#">
+        <input class="popup__form-item popup__form-item_profile-name" type="text" name="name" value="">
+        <input class="popup__form-item popup__form-item_profile-description" type="text" name="description" value="">
+        <button class="popup__save-button" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
 
   <!-- Add card popup -->
-  <div class="add-card popup">
-    <div class="add-card__container popup__container">
-      <button class="add-card__close-button popup__close-button" type="button"></button>
-      <p class="add-card__caption popup__caption">Новое место</p>
-      <form class="add-card__form popup__form" name="edit-profile" action="#">
-        <input class="add-card__form-item add-card__form-item_name popup__form-item popup__form-item_name" type="text"
-          name="name" value="" placeholder="Название">
-        <input class="add-card__form-item add-card__form-item_source popup__form-item popup__form-item_description"
-          type="text" name="source" value="" placeholder="Ссылка на картинку">
-        <button class="add-card__save-button popup__save-button" type="submit">Создать</button>
+  <div class="popup popup_function_add-card">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <p class="popup__caption">Новое место</p>
+      <form class="popup__form popup__form_function_add-card" name="add-card" action="#">
+        <input class="popup__form-item popup__form-item_card-name" type="text" name="name" value=""
+          placeholder="Название">
+        <input class="popup__form-item popup__form-item_card-source" type="text" name="source" value=""
+          placeholder="Ссылка на картинку">
+        <button class="popup__save-button" type="submit">Создать</button>
       </form>
     </div>
   </div>
 
   <!-- Image view popup -->
-  <div class="view-image popup">
-    <div class="view-image__container">
-      <img src="#" class="view-image__image" alt="Ваша фотография">
-      <button class="view-image__close-button popup__close-button" type="button"></button>
-      <p class="view-image__caption"></p>
+  <div class="popup popup_function_view-image">
+    <div class="popup__image-container">
+      <img src="#" class="popup__image" alt="Ваша фотография">
+      <button class="popup__close-button" type="button"></button>
+      <p class="popup__image-caption"></p>
     </div>
   </div>
 

@@ -1,21 +1,21 @@
 const buttonEdit = document.querySelector(".profile__edit-button");
 const buttonClose = document.querySelectorAll(".popup__close-button");
-const popupEdit = document.querySelector(".profile-edit");
-const popupAdd = document.querySelector(".add-card");
-const popupView = document.querySelector(".view-image");
+const popupEdit = document.querySelector(".popup_function_edit");
+const popupAdd = document.querySelector(".popup_function_add-card");
+const popupView = document.querySelector(".popup_function_view-image");
 const buttonAddCard = document.querySelector(".profile__add-button");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
-const elementEditForm = document.querySelector(".profile-edit__form");
-const elementAddForm = document.querySelector(".add-card__form");
-const inputName = elementEditForm.querySelector(".profile-edit__form-item_name");
-const inputDescription = elementEditForm.querySelector(".profile-edit__form-item_description");
-const inputCardName = elementAddForm.querySelector(".add-card__form-item_name");
-const inputCardSrc = elementAddForm.querySelector(".add-card__form-item_source");
+const elementEditForm = document.querySelector(".popup__form_function_edit");
+const elementAddForm = document.querySelector(".popup__form_function_add-card");
+const inputName = elementEditForm.querySelector(".popup__form-item_profile-name");
+const inputDescription = elementEditForm.querySelector(".popup__form-item_profile-description");
+const inputCardName = elementAddForm.querySelector(".popup__form-item_card-name");
+const inputCardSrc = elementAddForm.querySelector(".popup__form-item_card-source");
 const cardTemplate = document.querySelector("#cards__template").content;
 const cardsContainer = document.querySelector(".cards__container");
-const popupViewSrc = popupView.querySelector(".view-image__image");
-const popupViewCaption = popupView.querySelector(".view-image__caption");
+const popupViewSrc = popupView.querySelector(".popup__image");
+const popupViewCaption = popupView.querySelector(".popup__image-caption");
 
 // Открытие попапа
 function openPopup(target) {
