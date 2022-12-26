@@ -16,6 +16,13 @@ const cardTemplate = document.querySelector("#cards__template").content;
 const cardsContainer = document.querySelector(".cards__container");
 const popupViewSrc = popupView.querySelector(".popup__image");
 const popupViewCaption = popupView.querySelector(".popup__image-caption");
+const popupOverlays = Array.from(document.querySelectorAll('.popup'));
+const popupContainers = Array.prototype.concat(Array.from(document.querySelectorAll(".popup__container")), document.querySelector(".popup__image-container"));
+
+// Симуляция инпута
+function simulateInput(target) {
+  target.dispatchEvent(new Event('input', {bubbles:true}));
+};
 
 // Открытие попапа
 function openPopup(target) {
@@ -24,7 +31,7 @@ function openPopup(target) {
 
 // Закрытие попапа
 function closePopup(event) {
-  event.currentTarget.closest(".popup").classList.remove("popup_opened");
+  event.target.closest(".popup").classList.remove("popup_opened");
 }
 
 // Генерация карточки
@@ -66,6 +73,8 @@ openPopup(popupView);
 function openEditPopup() {
   inputName.value = `${profileName.textContent}`;
   inputDescription.value = `${profileDescription.textContent}`;
+  simulateInput(inputName);
+  simulateInput(inputDescription);
   openPopup(popupEdit);
 };
 
@@ -96,6 +105,69 @@ function deleteCard(e) {
   e.currentTarget.closest(".cards__item").remove();
 }
 
+// Тестовая работа над валидацией
+const formElement = document.querySelector('.popup__form');
+
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('popup__form-item_type_error');
+  errorElement.textContent = errorMessage;
+};
+
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('popup__form-item_type_error');
+  errorElement.textContent = "";
+};
+
+const isValid = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(".popup__form-item"));
+  const buttonElement = formElement.querySelector(".popup__save-button");
+  toggleButtonState(inputList, buttonElement);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      isValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    })
+  })
+};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll(".popup__form"));
+  formList.forEach((formElement) => {
+    setEventListeners(formElement)
+  });
+};
+
+const hasInvalidInput = (inputList) =>{
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  })
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add("popup__save-button_type_inactive");
+    buttonElement.disabled = true;
+  } else {
+    buttonElement.classList.remove("popup__save-button_type_inactive");
+    buttonElement.disabled = false;
+  }
+};
+
+enableValidation();
+
+
+// Конец валидации
+
 buttonEdit.addEventListener("click", openEditPopup);
 elementEditForm.addEventListener("submit", handleFormSubmit);
 elementAddForm.addEventListener("submit", handleAddCard);
@@ -104,3 +176,17 @@ buttonClose.forEach(button => {
 });
 buttonAddCard.addEventListener("click", () => openPopup(popupAdd));
 populateCards(initialCards);
+
+popupContainers.forEach(container => {
+  container.addEventListener("click", (e) => e.stopPropagation())
+});
+popupOverlays.forEach(overlay => {
+  overlay.addEventListener("click", closePopup);
+});
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector(".popup_opened");
+    openedPopup.classList.remove("popup_opened");
+  }
+})
