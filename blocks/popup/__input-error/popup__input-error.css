@@ -10,3 +10,9 @@
   overflow-wrap: break-word;
   max-width: 358px;
 }
+
+@media screen and (max-width: 550px) {
+  .popup__input-error {
+    max-width: 238px;
+  }
+}
