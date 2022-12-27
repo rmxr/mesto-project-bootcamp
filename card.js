@@ -3,7 +3,7 @@ import { cardsContainer, inputCardSrc, inputCardName, cardTemplate, initialCards
 import { openPopupView, closePopup } from "./modal.js";
 
 // Первичное заполнение страницы карточками из массива
-export function populateCards() {
+export function initializeCards() {
   initialCards.forEach(element => {
     addCard(element.link, element.name);
   })
