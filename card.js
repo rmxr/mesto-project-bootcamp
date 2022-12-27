@@ -22,12 +22,15 @@ function generateCard(imageSrc, imageTitle) {
   const likeButton = cardElement.querySelector(".cards__like-button");
   const deleteButton = cardElement.querySelector(".cards__delete-button");
   const clickableImage = cardElement.querySelector(".cards__image");
-  cardElement.querySelector(".cards__image").src = `${imageSrc}`;
-  cardElement.querySelector(".cards__image").alt = `${imageTitle}`;
+
+  clickableImage.src = imageSrc;
+  clickableImage.alt = imageTitle;
+
   cardElement.querySelector(".cards__title").textContent = `${imageTitle}`;
   likeButton.addEventListener("click", like);
   deleteButton.addEventListener("click", deleteCard);
   clickableImage.addEventListener("click", () => openPopupView(imageSrc, imageTitle));
+
   return cardElement;
 };
 
