@@ -5,20 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 
 <body class="page">
   <!-- Шапка -->
   <header class="header">
-    <img src="./images/__logo.svg" class="logo" alt="Место Россия">
+    <img src="<%=require('./images/__logo.svg')%>" class="logo" alt="Место Россия">
   </header>
 
   <main class="content">
     <!-- Profile -->
     <section class="profile">
       <div class="profile__container">
-        <img src="./images/avatar.jpg" class="profile__avatar" alt="Ваш аватар">
+        <img src="<%=require('./images/avatar.jpg')%>" class="profile__avatar" alt="Ваш аватар">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-button button" type="button"></button>
@@ -100,7 +100,7 @@
   </template>
 
   <!-- Script -->
-  <script type="module" src="./index.js"></script>
+  <!-- <script type="module" src="./index.js"></script> -->
 </body>
 
 </html>

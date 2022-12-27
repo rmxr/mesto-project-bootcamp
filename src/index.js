@@ -1,3 +1,4 @@
+import './pages/index.css';
 import { initialCards } from "./data.js";
 import { enableValidation } from "./validate.js";
 import { buttonEdit, buttonClose, popupAdd, buttonAddCard, elementEditForm, elementAddForm, cardTemplate, cardsContainer, popupOverlays, popupContainers, validationConfig } from "./constants.js";
