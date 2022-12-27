@@ -1,10 +1,10 @@
 import { like, deleteCard } from "./util.js";
-import { cardsContainer, inputCardSrc, inputCardName, cardTemplate } from "./constants.js";
+import { cardsContainer, inputCardSrc, inputCardName, cardTemplate, initialCards } from "./constants.js";
 import { openPopupView, closePopup } from "./modal.js";
 
 // Первичное заполнение страницы карточками из массива
-export function populateCards(cardsArray) {
-  cardsArray.forEach(element => {
+export function populateCards() {
+  initialCards.forEach(element => {
     addCard(element.link, element.name);
   })
 };
