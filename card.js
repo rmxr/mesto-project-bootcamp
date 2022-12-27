@@ -1,5 +1,6 @@
 import { like, deleteCard } from "./util.js";
-import { cardsContainer, inputCardSrc, inputCardName, cardTemplate, initialCards } from "./constants.js";
+import { cardsContainer, inputCardSrc, inputCardName, cardTemplate } from "./constants.js";
+import {initialCards } from "./data.js"
 import { openPopupView, closePopup } from "./modal.js";
 
 // Первичное заполнение страницы карточками из массива
