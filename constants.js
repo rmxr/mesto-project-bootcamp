@@ -17,7 +17,10 @@ export const cardsContainer = document.querySelector(".cards__container");
 export const popupViewSrc = popupView.querySelector(".popup__image");
 export const popupViewCaption = popupView.querySelector(".popup__image-caption");
 export const popupOverlays = Array.from(document.querySelectorAll('.popup'));
-export const popupContainers = Array.prototype.concat(Array.from(document.querySelectorAll(".popup__container")), document.querySelector(".popup__image-container"));
+
+const imageContainer = document.querySelector(".popup__image-container");
+export const popupContainers = Array.from(document.querySelectorAll(".popup__container")).concat(imageContainer);
+
 export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-item',
