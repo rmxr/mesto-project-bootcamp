@@ -80,10 +80,9 @@ popupOverlays.forEach(overlay => {
 enableValidation(validationConfig);
 
 // Обработчик добавления карточки юзером
-function handleAddCard(e, cardsContainer) {
-  console.log("index" + cardsContainer)
+function handleAddCard(e) {
   e.preventDefault();
-  addCard(inputCardSrc.value, inputCardName.value, cardTemplate, cardsContainer);
+  addCard(inputCardSrc.value, inputCardName.value, cardTemplate, like, deleteCard, cardsContainer, openPopupView);
   closePopup(e);
   inputCardName.value = "";
   inputCardSrc.value = "";
