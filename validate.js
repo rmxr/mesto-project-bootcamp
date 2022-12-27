@@ -1,18 +1,21 @@
 import {validationConfig} from "./constants.js";
 
 function showInputError(formElement, inputElement) {
+  const { inputErrorClass, errorClass } = validationConfig;
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
+  inputElement.classList.add(inputErrorClass);
   errorElement.textContent = inputElement.validationMessage;
-  inputElement.classList.add(validationConfig.inputErrorClass);
-  errorElement.classList.add(validationConfig.errorClass);
+  errorElement.classList.add(errorClass);
 }
 
 function hideInputError(formElement, inputElement) {
+  const { inputErrorClass, errorClass } = validationConfig;
+
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(validationConfig.inputErrorClass);
+  inputElement.classList.remove(inputErrorClass);
   errorElement.textContent = "";
-  errorElement.classList.remove(validationConfig.errorClass);
+  errorElement.classList.remove(errorClass);
 }
 
 function checkInputValidity(formElement, inputElement) {
