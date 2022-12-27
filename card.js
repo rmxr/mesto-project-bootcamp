@@ -1,18 +1,22 @@
+import { like, deleteCard } from "./util.js";
+import { cardsContainer, inputCardSrc, inputCardName, cardTemplate } from "./constants.js";
+import { openPopupView, closePopup } from "./modal.js";
+
 // Первичное заполнение страницы карточками из массива
-export function populateCards(cardsArray, cardTemplate, like, deleteCard, cardsContainer, openPopupView) {
+export function populateCards(cardsArray, cardTemplate) {
   cardsArray.forEach(element => {
-    addCard(element.link, element.name, cardTemplate, like, deleteCard, cardsContainer, openPopupView);
+    addCard(element.link, element.name, cardTemplate);
   })
 };
 
 // Добавление сгенерированной карточки в контейнер
-export function addCard(imageSrc, imageTitle, cardTemplate, like, deleteCard, cardsContainer, openPopupView) {
-  const card = generateCard(imageSrc, imageTitle, cardTemplate, like, deleteCard, openPopupView);
+export function addCard(imageSrc, imageTitle, cardTemplate) {
+  const card = generateCard(imageSrc, imageTitle, cardTemplate);
   cardsContainer.prepend(card);
 }
 
 // Генерация карточки
-function generateCard(imageSrc, imageTitle, cardTemplate, like, deleteCard, openPopupView) {
+function generateCard(imageSrc, imageTitle, cardTemplate) {
   const cardElement = cardTemplate.querySelector(".cards__item").cloneNode(true);
   const likeButton = cardElement.querySelector(".cards__like-button");
   const deleteButton = cardElement.querySelector(".cards__delete-button");
@@ -24,6 +28,15 @@ function generateCard(imageSrc, imageTitle, cardTemplate, like, deleteCard, open
   deleteButton.addEventListener("click", deleteCard);
   clickableImage.addEventListener("click", () => openPopupView(imageSrc, imageTitle));
   return cardElement;
+};
+
+// Обработчик добавления карточки юзером
+export function handleAddCard(e) {
+  e.preventDefault();
+  addCard(inputCardSrc.value, inputCardName.value, cardTemplate);
+  closePopup(e);
+  inputCardName.value = "";
+  inputCardSrc.value = "";
 };
 
 

@@ -1,66 +1,9 @@
 import { initialCards } from "./data.js";
 import { enableValidation } from "./validate.js";
-import { buttonEdit, buttonClose, popupEdit, popupAdd, popupView, buttonAddCard, profileName, profileDescription, elementEditForm, elementAddForm, inputName, inputDescription, inputCardName, inputCardSrc, cardTemplate, cardsContainer, popupViewSrc, popupViewCaption, popupOverlays, popupContainers, validationConfig } from "./constants.js";
-import { addCard,populateCards } from "./card.js";
-
-// Симуляция инпута
-function simulateInput(target) {
-  target.dispatchEvent(new Event('input', {bubbles:true}));
-};
-
-// Открытие попапа
-function openPopup(target) {
-  target.classList.add("popup_opened");
-  document.addEventListener('keydown', function escapeHandler(evt) {
-    if (evt.key === "Escape") {
-      target.classList.remove("popup_opened");
-      document.removeEventListener("keydown", escapeHandler);
-    }
-  });
-};
-
-// Закрытие попапа
-function closePopup(event) {
-  event.target.closest(".popup").classList.remove("popup_opened");
-}
-
-
-
-// Открытие изображения на весь экран
-function openPopupView(imageSrc, imageTitle) {
-popupViewSrc.src = imageSrc;
-popupViewCaption.textContent = imageTitle;
-openPopup(popupView);
-}
-
-// Открытие попапа редактирования профиля
-function openEditPopup() {
-  inputName.value = `${profileName.textContent}`;
-  inputDescription.value = `${profileDescription.textContent}`;
-  simulateInput(inputName);
-  simulateInput(inputDescription);
-  openPopup(popupEdit);
-};
-
-// Обработчик кнопки "Сохранить" редактора профиля
-function handleFormSubmit(e) {
-  e.preventDefault();
-  profileName.textContent = `${inputName.value}`;
-  profileDescription.textContent = `${inputDescription.value}`;
-  closePopup(e);
-}
-
-
-
-// Обработчик лайков
-function like(e) {
-  e.currentTarget.classList.toggle("cards__like-button_active");
-}
-
-// Удаление карточки
-function deleteCard(e) {
-  e.currentTarget.closest(".cards__item").remove();
-}
+import { buttonEdit, buttonClose, popupAdd, buttonAddCard, elementEditForm, elementAddForm, cardTemplate, cardsContainer, popupOverlays, popupContainers, validationConfig } from "./constants.js";
+import { populateCards, handleAddCard } from "./card.js";
+import { openPopup, closePopup, openPopupView, openEditPopup, handleFormSubmit} from "./modal.js"
+import { like, deleteCard } from "./util.js";
 
 buttonEdit.addEventListener("click", openEditPopup);
 elementEditForm.addEventListener("submit", handleFormSubmit);
@@ -79,11 +22,3 @@ popupOverlays.forEach(overlay => {
 });
 enableValidation(validationConfig);
 
-// Обработчик добавления карточки юзером
-function handleAddCard(e) {
-  e.preventDefault();
-  addCard(inputCardSrc.value, inputCardName.value, cardTemplate, like, deleteCard, cardsContainer, openPopupView);
-  closePopup(e);
-  inputCardName.value = "";
-  inputCardSrc.value = "";
-}
