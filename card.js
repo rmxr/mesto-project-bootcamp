@@ -3,20 +3,20 @@ import { cardsContainer, inputCardSrc, inputCardName, cardTemplate } from "./con
 import { openPopupView, closePopup } from "./modal.js";
 
 // Первичное заполнение страницы карточками из массива
-export function populateCards(cardsArray, cardTemplate) {
+export function populateCards(cardsArray) {
   cardsArray.forEach(element => {
-    addCard(element.link, element.name, cardTemplate);
+    addCard(element.link, element.name);
   })
 };
 
 // Добавление сгенерированной карточки в контейнер
-export function addCard(imageSrc, imageTitle, cardTemplate) {
-  const card = generateCard(imageSrc, imageTitle, cardTemplate);
+export function addCard(imageSrc, imageTitle) {
+  const card = generateCard(imageSrc, imageTitle);
   cardsContainer.prepend(card);
 }
 
 // Генерация карточки
-function generateCard(imageSrc, imageTitle, cardTemplate) {
+function generateCard(imageSrc, imageTitle) {
   const cardElement = cardTemplate.querySelector(".cards__item").cloneNode(true);
   const likeButton = cardElement.querySelector(".cards__like-button");
   const deleteButton = cardElement.querySelector(".cards__delete-button");
@@ -33,7 +33,7 @@ function generateCard(imageSrc, imageTitle, cardTemplate) {
 // Обработчик добавления карточки юзером
 export function handleAddCard(e) {
   e.preventDefault();
-  addCard(inputCardSrc.value, inputCardName.value, cardTemplate);
+  addCard(inputCardSrc.value, inputCardName.value);
   closePopup(e);
   inputCardName.value = "";
   inputCardSrc.value = "";
