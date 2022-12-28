@@ -1,5 +1,6 @@
 export const buttonEdit = document.querySelector(".profile__edit-button");
-export const buttonClose = document.querySelectorAll(".popup__close-button");
+export const popups = document.querySelectorAll('.popup');
+export const buttonsClose = document.querySelectorAll(".popup__close-button");
 export const popupEdit = document.querySelector(".popup_function_edit");
 export const popupAdd = document.querySelector(".popup_function_add-card");
 export const popupView = document.querySelector(".popup_function_view-image");
@@ -8,6 +9,7 @@ export const profileName = document.querySelector(".profile__name");
 export const profileDescription = document.querySelector(".profile__description");
 export const elementEditForm = document.querySelector(".popup__form_function_edit");
 export const elementAddForm = document.querySelector(".popup__form_function_add-card");
+export const elementsAddFormInputs = elementAddForm.querySelectorAll("input");
 export const inputName = elementEditForm.querySelector(".popup__form-item_profile-name");
 export const inputDescription = elementEditForm.querySelector(".popup__form-item_profile-description");
 export const inputCardName = elementAddForm.querySelector(".popup__form-item_card-name");

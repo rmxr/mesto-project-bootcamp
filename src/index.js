@@ -1,23 +1,27 @@
 import './pages/index.css';
 import { enableValidation } from "./validate.js";
-import { buttonEdit, buttonClose, popupAdd, buttonAddCard, elementEditForm, elementAddForm, cardTemplate, cardsContainer, popupOverlays, popupContainers, validationConfig } from "./constants.js";
+import { buttonEdit, buttonsClose, popupAdd, buttonAddCard, elementEditForm, elementAddForm, popupOverlays, popupContainers, validationConfig } from "./constants.js";
 import { initializeCards, handleAddCard } from "./card.js";
-import { openPopup, closePopup, openPopupView, openEditPopup, handleFormSubmit} from "./modal.js"
+import { closePopup, openEditPopup, handleFormSubmit, openAddPopup} from "./modal.js"
 
 buttonEdit.addEventListener("click", openEditPopup);
 elementEditForm.addEventListener("submit", handleFormSubmit);
 elementAddForm.addEventListener("submit", handleAddCard);
-buttonClose.forEach(button => {
-  button.addEventListener("click", closePopup)
+buttonAddCard.addEventListener("click", () => {
+  openAddPopup(popupAdd);
 });
-buttonAddCard.addEventListener("click", () => openPopup(popupAdd));
 initializeCards();
 
 popupContainers.forEach(container => {
-  container.addEventListener("click", (e) => e.stopPropagation())
-});
-popupOverlays.forEach(overlay => {
-  overlay.addEventListener("click", closePopup);
+  container.addEventListener("mousedown", (e) => e.stopPropagation())
 });
 enableValidation(validationConfig);
+
+buttonsClose.forEach(button => {
+  button.addEventListener("click", (evt) => closePopup(evt.target))
+});
+
+popupOverlays.forEach(overlay => {
+  overlay.addEventListener("mousedown", (evt) => closePopup(evt.target));
+});
 

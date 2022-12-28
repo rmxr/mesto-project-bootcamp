@@ -35,9 +35,8 @@ function generateCard(imageSrc, imageTitle) {
 export function handleAddCard(e) {
   e.preventDefault();
   addCard(inputCardSrc.value, inputCardName.value);
-  closePopup(e);
-  inputCardName.value = "";
-  inputCardSrc.value = "";
+  closePopup(e.target);
+  e.target.reset();
 };
 
 
