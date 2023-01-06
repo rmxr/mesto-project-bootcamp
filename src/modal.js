@@ -1,4 +1,8 @@
-import { inputName, profileName, inputDescription, profileDescription, popupViewSrc, popupEdit, popupViewCaption, popupView, elementsAddFormInputs } from "./constants.js";
+import { inputName, profileName, inputDescription, profileDescription, popupViewSrc, popupEdit, popupViewCaption, popupView, elementsAddFormInputs, inputAvatarSrc } from "./constants.js";
+import { sendAvatar, sendUserInfo } from "./api.js";
+import { renderUserInfo } from "./util.js";
+
+
 // Открытие попапа
 export function openPopup(target) {
   target.classList.add("popup_opened");
@@ -18,7 +22,6 @@ function closeByEscape(evt) {
     closePopup(openedPopup);
   }
 };
-
 
 // Открытие изображения на весь экран
 export function openPopupView(imageSrc, imageTitle) {
@@ -52,7 +55,22 @@ export function openAddPopup(popupAdd) {
 // Обработчик кнопки "Сохранить" редактора профиля
 export function handleFormSubmit(e) {
   e.preventDefault();
-  profileName.textContent = `${inputName.value}`;
-  profileDescription.textContent = `${inputDescription.value}`;
+  sendUserInfo(`${inputName.value}`, `${inputDescription.value}`)
+    .then((data) => renderUserInfo(data))
+    .catch((err) => {
+      console.log(err);
+   });
   closePopup(e.target);
 }
+
+// Обработчик кнопки "Сохранить" формы смены аватара
+export function handleChangeAvatar(e) {
+  e.preventDefault();
+  sendAvatar(`${inputAvatarSrc.value}`)
+  .then((data) => renderUserInfo(data))
+  .catch((err) => {
+    console.log(err);
+ });
+  closePopup(e.target);
+  e.target.reset();
+};

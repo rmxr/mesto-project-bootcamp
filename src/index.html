@@ -19,11 +19,11 @@
     <section class="profile">
       <div class="profile__container">
         <!-- <div src="<%=require('./images/avatar.jpg')%>" class="profile__avatar" alt="Ваш аватар"></div> -->
-        <div class="profile__avatar" alt="Ваш аватар"></div>
+        <div class="profile__avatar"></div>
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <h1 class="profile__name"></h1>
           <button class="profile__edit-button button" type="button"></button>
-          <p class="profile__description">Исследователь океана</p>
+          <p class="profile__description"></p>
         </div>
       </div>
       <button class="profile__add-button button" type="button"></button>
@@ -54,6 +54,22 @@
           <input id="description-input" class="popup__form-item popup__form-item_profile-description" type="text"
             name="description" value="" required minlength="2" maxlength="200">
           <span class="description-input-error popup__input-error"></span>
+        </label>
+        <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Avatar edit popup -->
+  <div class="popup popup_function_avatar-change">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <p class="popup__caption">Обновить аватар</p>
+      <form class="popup__form popup__form_function_avatar-change" name="change-avatar" action="#" novalidate>
+        <label class="popup__form-label">
+          <input type="url" id="avatar-link-input" class="popup__form-item popup__form-item_avatar-source" type="text"
+            name="source" value="" required placeholder="Ссылка на картинку">
+          <span class="avatar-link-input-error popup__input-error"></span>
         </label>
         <button class="popup__save-button" type="submit">Сохранить</button>
       </form>

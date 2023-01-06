@@ -17,4 +17,49 @@ export const getInitialCards = () => {
     });
 };
 
+export const getUserInfo = () => {
+  return fetch(`${config.baseUrl}/users/me`, {
+    headers: config.headers
+  })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    })
+};
+
+export const sendUserInfo = (name, description) => {
+  return fetch(`${config.baseUrl}/users/me`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({
+      name: `${name}`,
+      about: `${description}`
+    })
+  })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    })
+};
+
+export const sendAvatar = (linkToAvatar) => {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({
+      avatar: `${linkToAvatar}`,
+    })
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Что-то пошло не так: ${res.status}`);
+  })
+};
+
 
