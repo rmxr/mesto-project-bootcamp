@@ -2,7 +2,8 @@ import './pages/index.css';
 import { enableValidation } from "./validate.js";
 import { buttonEdit, buttonsClose, popupAdd, buttonAddCard, elementEditForm, elementAddForm, popupOverlays, popupContainers, validationConfig } from "./constants.js";
 import { initializeCards, handleAddCard } from "./card.js";
-import { closePopup, openEditPopup, handleFormSubmit, openAddPopup} from "./modal.js"
+import { closePopup, openEditPopup, handleFormSubmit, openAddPopup} from "./modal.js";
+import { getInitialCards } from './api.js';
 
 buttonEdit.addEventListener("click", openEditPopup);
 elementEditForm.addEventListener("submit", handleFormSubmit);
@@ -11,6 +12,7 @@ buttonAddCard.addEventListener("click", () => {
   openAddPopup(popupAdd);
 });
 initializeCards();
+getInitialCards();
 
 popupContainers.forEach(container => {
   container.addEventListener("mousedown", (e) => e.stopPropagation())
