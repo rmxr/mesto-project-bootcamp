@@ -10,23 +10,14 @@ export const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
   })
-    .then(res => {
-      if (res.ok) {
-        console.log(res.json());
-      }
-    });
+    .then(res => handleServerResponse(res));
 };
 
 export const getUserInfo = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
+    .then(res => handleServerResponse(res))
 };
 
 export const sendUserInfo = (name, description) => {
@@ -38,12 +29,7 @@ export const sendUserInfo = (name, description) => {
       about: `${description}`
     })
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
+    .then(res => handleServerResponse(res))
 };
 
 export const sendAvatar = (linkToAvatar) => {
@@ -54,12 +40,15 @@ export const sendAvatar = (linkToAvatar) => {
       avatar: `${linkToAvatar}`,
     })
   })
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-  })
+  .then(res => handleServerResponse(res))
+};
+
+
+function handleServerResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Что-то пошло не так: ${res.status}`);
 };
 
 
