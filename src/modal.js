@@ -86,7 +86,10 @@ export function handleChangeAvatar(e) {
 export function handleConfirmCardDeletion(e) {
   e.preventDefault();
   // console.log(`Удалил ${cardForDeletion}`);
-  requestCardDeletion(cardForDeletion).then(() => initializeCards());
-  elementConfirmationForm.removeEventListener("submit", handleConfirmCardDeletion);
-  closePopup(e.target);
+  requestCardDeletion(cardForDeletion)
+  .then(() => initializeCards())
+  .finally(() => {
+    elementConfirmationForm.removeEventListener("submit", handleConfirmCardDeletion);
+    closePopup(e.target);
+  })
 }
