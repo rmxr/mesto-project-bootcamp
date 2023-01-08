@@ -43,6 +43,34 @@ export const sendAvatar = (linkToAvatar) => {
   .then(res => handleServerResponse(res))
 };
 
+export const sendNewCard = (cardName, cardLink) => {
+  return fetch(`${config.baseUrl}/cards`, {
+    method: 'POST',
+    headers: config.headers,
+    body: JSON.stringify({
+      name: `${cardName}`,
+      link: `${cardLink}`
+    })
+  })
+  .then(res => handleServerResponse(res))
+};
+
+export const requestCardDeletion = (cardID) => {
+  return fetch(`${config.baseUrl}/cards/${cardID}`, {
+    method: 'DELETE',
+    headers: config.headers,
+  })
+  .then(res => handleServerResponse(res))
+};
+
+export const sendLike = (isLiked, cardID) => {
+  const m = isLiked === true ? 'DELETE' : 'PUT';
+  return fetch(`${config.baseUrl}/cards/likes/${cardID}`, {
+    method: m,
+    headers: config.headers,
+  })
+  .then(res => handleServerResponse(res))
+};
 
 function handleServerResponse(res) {
   if (res.ok) {

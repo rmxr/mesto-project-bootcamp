@@ -74,3 +74,10 @@ export function handleChangeAvatar(e) {
   closePopup(e.target);
   e.target.reset();
 };
+
+// Обработчик подтверждения удаления карточки
+export function handleConfirmCardDeletion(e) {
+  e.preventDefault();
+  console.log("Удалено!");
+  closePopup(e.target);
+}

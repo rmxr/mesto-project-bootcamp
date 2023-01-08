@@ -1,9 +1,9 @@
 import './pages/index.css';
 import { enableValidation } from "./validate.js";
-import { elementAvatarEditForm, popupChangeAvatar, profileAvatar, buttonEdit, buttonsClose, popupAdd, buttonAddCard, elementEditForm, elementAddForm, popupOverlays, popupContainers, validationConfig } from "./constants.js";
-import { initializeCards, handleAddCard } from "./card.js";
-import { closePopup, openEditPopup, handleFormSubmit, openAddPopup, openPopup, handleChangeAvatar} from "./modal.js";
-import { initializeUserInfo } from './util.js';
+import { elementAvatarEditForm, popupChangeAvatar, profileAvatar, buttonEdit, buttonsClose, popupAdd, buttonAddCard, elementEditForm, elementAddForm, popupOverlays, popupContainers, validationConfig, elementConfirmationForm } from "./constants.js";
+import { handleAddCard } from "./card.js";
+import { closePopup, openEditPopup, handleFormSubmit, openAddPopup, openPopup, handleChangeAvatar } from "./modal.js";
+import { initializePageContent } from './util.js';
 
 buttonEdit.addEventListener("click", openEditPopup);
 elementEditForm.addEventListener("submit", handleFormSubmit);
@@ -14,9 +14,7 @@ buttonAddCard.addEventListener("click", () => {
 });
 profileAvatar.addEventListener("click", () => {openPopup(popupChangeAvatar)});
 
-initializeCards();
-
-initializeUserInfo();
+initializePageContent();
 
 popupContainers.forEach(container => {
   container.addEventListener("mousedown", (e) => e.stopPropagation())

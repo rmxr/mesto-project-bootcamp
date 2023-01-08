@@ -1,8 +1,10 @@
 .cards__delete-button {
+  padding: 0;
   position: absolute;
   background-image: url(../../../images/__delete-button.svg);
   width: 18px;
   height: 19px;
   top: 20px;
   right: 20px;
+  filter: drop-shadow(0 0 18px black);
 }

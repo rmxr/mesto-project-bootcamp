@@ -46,3 +46,4 @@
 @import url(../blocks/popup/__form-item/_type/_error/popup__form-item_type_error.css);
 @import url(../blocks/popup/__save-button/_type_inactive/popup__save-button_type_inactive.css);
 @import url(../blocks/popup/__input-error/_visible/popup__input-error_visible.css);
+@import url(../blocks/popup/__form/_function_card-delete-confirm/popup__form_function_card-delete-confirm.css);
