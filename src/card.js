@@ -1,5 +1,5 @@
 import { like, deleteCard } from "./util.js";
-import { cardsContainer, inputCardSrc, inputCardName, cardTemplate, userID } from "./constants.js";
+import { cardsContainer, inputCardSrc, inputCardName, cardTemplate, userID, cardsList } from "./constants.js";
 import { openPopupView, closePopup } from "./modal.js";
 import { getInitialCards, sendNewCard } from "./api.js";
 
@@ -8,35 +8,38 @@ export function initializeCards() {
   cardsContainer.innerHTML = "";
   getInitialCards().then(data => {
     data.forEach(element => {
-      addCard(element.link, element.name, element.likes, element.owner["_id"], element["_id"]);
+      addCard(element);
     })
   });
 };
 
 // Добавление сгенерированной карточки в контейнер
-export function addCard(imageSrc, imageTitle, likes, cardOwnerID, cardID) {
-  const card = generateCard(imageSrc, imageTitle, likes, cardOwnerID, cardID);
+export function addCard(data) {
+  const card = generateCard(data);
   cardsContainer.append(card);
 }
 
 // Генерация карточки
-function generateCard(imageSrc, imageTitle, likes, cardOwnerID, cardID) {
+// generateCard (imageSrc,     imageTitle,      likes,      cardOwnerID,           cardID)
+// addCard      (element.link, element.name, element.likes, element.owner["_id"], element["_id"]);
+
+function generateCard(data) {
   const cardElement = cardTemplate.querySelector(".cards__item").cloneNode(true);
   const likeButton = cardElement.querySelector(".cards__like-button");
   const deleteButton = cardElement.querySelector(".cards__delete-button");
   const clickableImage = cardElement.querySelector(".cards__image");
   const likesCounter = cardElement.querySelector(".cards__like-counter");
-  const isLiked = checkIfLiked(likes);
-  clickableImage.src = `${imageSrc}`;
-  clickableImage.alt = `${imageTitle}`;
-  likesCounter.textContent = likes.length;
-  console.log(isLiked);
-  cardElement.querySelector(".cards__title").textContent = `${imageTitle}`;
-  likeButton.addEventListener("click", () => like(isLiked, cardID));
-  clickableImage.addEventListener("click", () => openPopupView(imageSrc, imageTitle));
+  const isLiked = checkIfLiked(data.likes);
+  clickableImage.src = `${data.link}`;
+  clickableImage.alt = `${data.name}`;
+  likesCounter.textContent = data.likes.length;
+  cardElement.querySelector(".cards__title").textContent = `${data.name}`;
+  likeButton.addEventListener("click", () => like(data["_id"], likeButton, likesCounter));
+  clickableImage.addEventListener("click", () => openPopupView(data.link, data.name));
   if (isLiked) {likeButton.classList.add("cards__like-button_active")};
-  if (cardOwnerID !== userID) {deleteButton.remove()};
-  if (cardOwnerID === userID) {deleteButton.addEventListener("click", () => deleteCard(cardID))}
+  if (data.owner["_id"] !== userID) {deleteButton.remove()};
+  if (data.owner["_id"] === userID) {deleteButton.addEventListener("click", () => deleteCard(data["_id"]))}
+  cardsList[`${data["_id"]}`] = {"isLiked": isLiked, "likesCount": data.likes.length};
   return cardElement;
 };
 

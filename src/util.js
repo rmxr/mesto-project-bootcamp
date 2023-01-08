@@ -1,12 +1,17 @@
 import { getUserInfo, requestCardDeletion, sendLike } from "./api.js";
-import { profileAvatar, profileDescription, profileName, setUserID, popupConfirmDeletion, elementConfirmationForm } from "./constants.js";
+import { profileAvatar, profileDescription, profileName, userID, setUserID, cardsList, popupConfirmDeletion, elementConfirmationForm } from "./constants.js";
 import { initializeCards } from "./card.js";
 import { openPopup, handleConfirmCardDeletion } from "./modal.js";
 
 // Обработчик лайков
-export function like(isLiked, cardID) {
-  sendLike(isLiked, cardID);
-
+export function like(cardID, likeButton, likesCounter) {
+  sendLike(cardsList[`${cardID}`]["isLiked"], cardID)
+    .then(data => {
+      likesCounter.textContent = data.likes.length;
+      likeButton.classList.toggle("cards__like-button_active")
+      cardsList[`${cardID}`]["isLiked"] = !cardsList[`${cardID}`]["isLiked"];
+    });
+  ;
 };
 
 // const DeletePromise = new Promise(function(resolve, reject) {

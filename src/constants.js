@@ -12,6 +12,7 @@ export const profileName = document.querySelector(".profile__name");
 export const profileDescription = document.querySelector(".profile__description");
 export let userID = "";
 export const setUserID = (val) => {userID = val};
+export const cardsList = {};
 export const elementEditForm = document.querySelector(".popup__form_function_edit");
 export const elementAddForm = document.querySelector(".popup__form_function_add-card");
 export const elementAvatarEditForm = document.querySelector(".popup__form_function_avatar-change");
