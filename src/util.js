@@ -24,26 +24,6 @@ export function like(cardID, likeButton, likesCounter) {
     });
 };
 
-// const DeletePromise = new Promise(function(resolve, reject) {
-//   elementConfirmationForm.addEventListener("submit", () => resolve());
-
-//   const mutationObserver = new MutationObserver(callback);
-
-//   function callback(mutationsList) {
-//     mutationsList.forEach(mutation => {
-//       if (!mutation.target.className.includes("popup_opened")) {
-//         mutationObserver.disconnect();
-//         reject();
-//       };
-//     })
-//   }
-
-
-//   mutationObserver.observe(popupConfirmDeletion, { attributes: true });
-
-// });
-
-
 // Удаление карточки
 export function deleteCard(cardID) {
   // requestCardDeletion(cardID).then(() => initializeCards());
