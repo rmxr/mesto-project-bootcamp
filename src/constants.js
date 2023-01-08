@@ -13,6 +13,8 @@ export const profileDescription = document.querySelector(".profile__description"
 export let userID = "";
 export const setUserID = (val) => {userID = val};
 export const cardsList = {};
+export let cardForDeletion = '';
+export const setCardForDeletion = (val) => {cardForDeletion = val};
 export const elementEditForm = document.querySelector(".popup__form_function_edit");
 export const elementAddForm = document.querySelector(".popup__form_function_add-card");
 export const elementAvatarEditForm = document.querySelector(".popup__form_function_avatar-change");

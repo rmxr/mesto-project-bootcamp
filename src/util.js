@@ -1,5 +1,5 @@
 import { getUserInfo, requestCardDeletion, sendLike } from "./api.js";
-import { profileAvatar, profileDescription, profileName, userID, setUserID, cardsList, popupConfirmDeletion, elementConfirmationForm } from "./constants.js";
+import { profileAvatar, profileDescription, profileName, userID, setUserID, cardsList, popupConfirmDeletion, elementConfirmationForm, cardForDeletion, setCardForDeletion } from "./constants.js";
 import { initializeCards } from "./card.js";
 import { openPopup, handleConfirmCardDeletion } from "./modal.js";
 
@@ -46,13 +46,13 @@ export function like(cardID, likeButton, likesCounter) {
 
 // Удаление карточки
 export function deleteCard(cardID) {
-  requestCardDeletion(cardID).then(() => initializeCards());
-
-  // openPopup(popupConfirmDeletion);
+  // requestCardDeletion(cardID).then(() => initializeCards());
+  setCardForDeletion(cardID);
+  elementConfirmationForm.addEventListener("submit", handleConfirmCardDeletion)
+  openPopup(popupConfirmDeletion);
   // DeletePromise
   // .then(() => console.log("Удалил через промис"))
   // .catch(() => console.log("Отменил удаление"));
-  // elementConfirmationForm.addEventListener("submit", handleConfirmCardDeletion)
 };
 
 

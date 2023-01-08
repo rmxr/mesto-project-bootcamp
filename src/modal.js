@@ -1,6 +1,7 @@
-import { inputName, profileName, inputDescription, profileDescription, popupViewSrc, popupEdit, popupViewCaption, popupView, elementsAddFormInputs, inputAvatarSrc } from "./constants.js";
-import { sendAvatar, sendUserInfo } from "./api.js";
+import { inputName, profileName, inputDescription, profileDescription, popupViewSrc, popupEdit, popupViewCaption, popupView, elementsAddFormInputs, inputAvatarSrc, cardForDeletion, elementConfirmationForm } from "./constants.js";
+import { sendAvatar, sendUserInfo, requestCardDeletion } from "./api.js";
 import { renderLoading, renderUserInfo } from "./util.js";
+import { initializeCards } from "./card.js";
 
 
 // Открытие попапа
@@ -84,6 +85,8 @@ export function handleChangeAvatar(e) {
 // Обработчик подтверждения удаления карточки
 export function handleConfirmCardDeletion(e) {
   e.preventDefault();
-  console.log("Удалено!");
+  // console.log(`Удалил ${cardForDeletion}`);
+  requestCardDeletion(cardForDeletion).then(() => initializeCards());
+  elementConfirmationForm.removeEventListener("submit", handleConfirmCardDeletion);
   closePopup(e.target);
 }
