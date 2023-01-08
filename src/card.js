@@ -1,4 +1,4 @@
-import { like, deleteCard } from "./util.js";
+import { like, deleteCard, renderLoading } from "./util.js";
 import { cardsContainer, inputCardSrc, inputCardName, cardTemplate, userID, cardsList } from "./constants.js";
 import { openPopupView, closePopup } from "./modal.js";
 import { getInitialCards, sendNewCard } from "./api.js";
@@ -46,12 +46,18 @@ function generateCard(data) {
 // Обработчик добавления карточки юзером
 export function handleAddCard(e) {
   e.preventDefault();
+  const button = e.currentTarget.querySelector(".popup__save-button");
+  renderLoading(true, button);
   sendNewCard(inputCardName.value, inputCardSrc.value)
     .then(() => {
       initializeCards();
       closePopup(e.target);
       e.target.reset();
     })
+    .catch((err) => {
+      console.log(err);
+   })
+    .finally(() => renderLoading(false, button, "Создать"))
 };
 
 // Проверка на лайкнутость

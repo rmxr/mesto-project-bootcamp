@@ -3,6 +3,17 @@ import { profileAvatar, profileDescription, profileName, userID, setUserID, card
 import { initializeCards } from "./card.js";
 import { openPopup, handleConfirmCardDeletion } from "./modal.js";
 
+
+// Надпись "Сохранить..." во время ожидания ответа сервера
+
+export function renderLoading(isLoading, button, origText){
+  if (isLoading){
+    button.textContent = "Сохранение...";
+  } else {
+    button.textContent = origText;
+  }
+};
+
 // Обработчик лайков
 export function like(cardID, likeButton, likesCounter) {
   sendLike(cardsList[`${cardID}`], cardID)

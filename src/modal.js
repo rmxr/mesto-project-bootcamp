@@ -1,6 +1,6 @@
 import { inputName, profileName, inputDescription, profileDescription, popupViewSrc, popupEdit, popupViewCaption, popupView, elementsAddFormInputs, inputAvatarSrc } from "./constants.js";
 import { sendAvatar, sendUserInfo } from "./api.js";
-import { renderUserInfo } from "./util.js";
+import { renderLoading, renderUserInfo } from "./util.js";
 
 
 // Открытие попапа
@@ -55,22 +55,28 @@ export function openAddPopup(popupAdd) {
 // Обработчик кнопки "Сохранить" редактора профиля
 export function handleFormSubmit(e) {
   e.preventDefault();
+  const button = e.currentTarget.querySelector(".popup__save-button");
+  renderLoading(true, button)
   sendUserInfo(`${inputName.value}`, `${inputDescription.value}`)
     .then((data) => renderUserInfo(data))
     .catch((err) => {
       console.log(err);
-   });
+   })
+    .finally(() => renderLoading(false, button, "Сохранить"));
   closePopup(e.target);
 }
 
 // Обработчик кнопки "Сохранить" формы смены аватара
 export function handleChangeAvatar(e) {
   e.preventDefault();
+  const button = e.currentTarget.querySelector(".popup__save-button");
+  renderLoading(true, button);
   sendAvatar(`${inputAvatarSrc.value}`)
   .then((data) => renderUserInfo(data))
   .catch((err) => {
     console.log(err);
- });
+ })
+  .finally(() => renderLoading(false, button, "Сохранить"));
   closePopup(e.target);
   e.target.reset();
 };
