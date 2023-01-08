@@ -5,13 +5,12 @@ import { openPopup, handleConfirmCardDeletion } from "./modal.js";
 
 // Обработчик лайков
 export function like(cardID, likeButton, likesCounter) {
-  sendLike(cardsList[`${cardID}`]["isLiked"], cardID)
+  sendLike(cardsList[`${cardID}`], cardID)
     .then(data => {
       likesCounter.textContent = data.likes.length;
-      likeButton.classList.toggle("cards__like-button_active")
-      cardsList[`${cardID}`]["isLiked"] = !cardsList[`${cardID}`]["isLiked"];
+      likeButton.classList.toggle("cards__like-button_active");
+      cardsList[`${cardID}`] = !cardsList[`${cardID}`];
     });
-  ;
 };
 
 // const DeletePromise = new Promise(function(resolve, reject) {

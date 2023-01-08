@@ -39,7 +39,7 @@ function generateCard(data) {
   if (isLiked) {likeButton.classList.add("cards__like-button_active")};
   if (data.owner["_id"] !== userID) {deleteButton.remove()};
   if (data.owner["_id"] === userID) {deleteButton.addEventListener("click", () => deleteCard(data["_id"]))}
-  cardsList[`${data["_id"]}`] = {"isLiked": isLiked, "likesCount": data.likes.length};
+  cardsList[`${data["_id"]}`] = isLiked;
   return cardElement;
 };
 
