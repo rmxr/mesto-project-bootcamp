@@ -1,5 +1,5 @@
-import { getUserInfo, requestCardDeletion, sendLike } from "./api.js";
-import { profileAvatar, profileDescription, profileName, userID, setUserID, cardsList, popupConfirmDeletion, elementConfirmationForm, cardForDeletion, setCardForDeletion } from "./constants.js";
+import { getUserInfo, sendLike } from "./api.js";
+import { profileAvatar, profileDescription, profileName, setUserID, cardsList, popupConfirmDeletion, elementConfirmationForm, setCardForDeletion } from "./constants.js";
 import { initializeCards } from "./card.js";
 import { openPopup, handleConfirmCardDeletion } from "./modal.js";
 
