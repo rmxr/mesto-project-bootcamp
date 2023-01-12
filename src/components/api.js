@@ -6,22 +6,27 @@ const config = {
   }
 };
 
+function handleServerResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Что-то пошло не так: ${res.status}`);
+};
+
+function request(url, options) {
+  return fetch(url, options).then(res => handleServerResponse(res))
+};
+
 export const getInitialCards = () => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers
-  })
-    .then(res => handleServerResponse(res));
+  return request(`${config.baseUrl}/cards`, {headers: config.headers})
 };
 
 export const getUserInfo = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers
-  })
-    .then(res => handleServerResponse(res))
+  return request(`${config.baseUrl}/users/me`, {headers: config.headers})
 };
 
 export const sendUserInfo = (name, description) => {
-  return fetch(`${config.baseUrl}/users/me`, {
+  return request(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
     headers: config.headers,
     body: JSON.stringify({
@@ -29,22 +34,20 @@ export const sendUserInfo = (name, description) => {
       about: `${description}`
     })
   })
-    .then(res => handleServerResponse(res))
 };
 
 export const sendAvatar = (linkToAvatar) => {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
+  return request(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: config.headers,
     body: JSON.stringify({
       avatar: `${linkToAvatar}`,
     })
   })
-  .then(res => handleServerResponse(res))
 };
 
 export const sendNewCard = (cardName, cardLink) => {
-  return fetch(`${config.baseUrl}/cards`, {
+  return request(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
     body: JSON.stringify({
@@ -52,31 +55,20 @@ export const sendNewCard = (cardName, cardLink) => {
       link: `${cardLink}`
     })
   })
-  .then(res => handleServerResponse(res))
 };
 
 export const requestCardDeletion = (cardID) => {
-  return fetch(`${config.baseUrl}/cards/${cardID}`, {
+  return request(`${config.baseUrl}/cards/${cardID}`, {
     method: 'DELETE',
     headers: config.headers,
   })
-  .then(res => handleServerResponse(res))
 };
 
 export const sendLike = (isLiked, cardID) => {
-  const m = isLiked === true ? 'DELETE' : 'PUT';
-  return fetch(`${config.baseUrl}/cards/likes/${cardID}`, {
-    method: m,
+  return request(`${config.baseUrl}/cards/likes/${cardID}`, {
+    method: isLiked === true ? 'DELETE' : 'PUT',
     headers: config.headers,
   })
-  .then(res => handleServerResponse(res))
-};
-
-function handleServerResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Что-то пошло не так: ${res.status}`);
 };
 
 

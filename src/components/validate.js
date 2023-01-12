@@ -40,6 +40,12 @@ function setEventListeners (formElement, {inputSelector, submitButtonSelector, i
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
   toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+  formElement.addEventListener('reset', () => {
+    // `setTimeout` нужен для того, чтобы дождаться очищения формы (вызов уйдет в конце стэка) и только потом вызвать `toggleButtonState`
+    setTimeout(() => {
+     toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+    }, 0); // достаточно указать 0 миллисекунд, чтобы после `reset` уже сработало действие
+  });
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement, inputErrorClass, errorClass);

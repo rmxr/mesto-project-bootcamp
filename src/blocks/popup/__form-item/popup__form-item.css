@@ -7,10 +7,12 @@
   letter-spacing: 0em;
   text-align: left;
   border: none;
+  border-radius: 0;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   font-family: inherit;
   display: block;
   min-width: 358px;
+  -webkit-appearance: none;
 }
 
 .popup__form-item:focus {

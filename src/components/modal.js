@@ -1,7 +1,6 @@
 import { inputName, profileName, inputDescription, profileDescription, popupViewSrc, popupEdit, popupViewCaption, popupView, elementsAddFormInputs, inputAvatarSrc, cardForDeletion, elementConfirmationForm } from "./constants.js";
 import { sendAvatar, sendUserInfo, requestCardDeletion } from "./api.js";
 import { renderLoading, renderUserInfo } from "./util.js";
-import { initializeCards } from "./card.js";
 
 
 // Открытие попапа
@@ -48,23 +47,25 @@ export function openEditPopup() {
 
 // Открытие попапа добавления карточки
 export function openAddPopup(popupAdd) {
-  elementsAddFormInputs.forEach((input) => simulateInput(input));
+  // elementsAddFormInputs.forEach((input) => simulateInput(input));
   openPopup(popupAdd);
 }
 
 
 // Обработчик кнопки "Сохранить" редактора профиля
-export function handleFormSubmit(e) {
+export function handleProfileFormSubmit(e) {
   e.preventDefault();
   const button = e.currentTarget.querySelector(".popup__save-button");
   renderLoading(true, button)
   sendUserInfo(`${inputName.value}`, `${inputDescription.value}`)
-    .then((data) => renderUserInfo(data))
+    .then((data) => {
+      renderUserInfo(data)
+      closePopup(e.target);
+    })
     .catch((err) => {
       console.log(err);
    })
     .finally(() => renderLoading(false, button, "Сохранить"));
-  closePopup(e.target);
 }
 
 // Обработчик кнопки "Сохранить" формы смены аватара
@@ -73,23 +74,25 @@ export function handleChangeAvatar(e) {
   const button = e.currentTarget.querySelector(".popup__save-button");
   renderLoading(true, button);
   sendAvatar(`${inputAvatarSrc.value}`)
-  .then((data) => renderUserInfo(data))
+  .then((data) => {
+    renderUserInfo(data);
+    closePopup(e.target);
+    e.target.reset();
+  })
   .catch((err) => {
     console.log(err);
  })
   .finally(() => renderLoading(false, button, "Сохранить"));
-  closePopup(e.target);
-  e.target.reset();
 };
 
 // Обработчик подтверждения удаления карточки
-export function handleConfirmCardDeletion(e) {
+export function handleConfirmCardDeletion(e, card) {
   e.preventDefault();
-  // console.log(`Удалил ${cardForDeletion}`);
   requestCardDeletion(cardForDeletion)
-  .then(() => initializeCards())
-  .finally(() => {
-    elementConfirmationForm.removeEventListener("submit", handleConfirmCardDeletion);
+  .then(() => {
+    card.remove()
     closePopup(e.target);
+    elementConfirmationForm.removeEventListener("submit", handleConfirmCardDeletion);
   })
+  .catch(err => console.log(err))
 }

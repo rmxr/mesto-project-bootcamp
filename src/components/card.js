@@ -4,19 +4,29 @@ import { openPopupView, closePopup } from "./modal.js";
 import { getInitialCards, sendNewCard } from "./api.js";
 
 // Первичное заполнение страницы карточками из массива
-export function initializeCards() {
-  cardsContainer.innerHTML = "";
-  getInitialCards().then(data => {
-    data.forEach(element => {
-      addCard(element);
-    })
-  });
+// export function initializeCards() {
+//   cardsContainer.innerHTML = "";
+//   getInitialCards()
+//   .then(data => {
+//     data.reverse();
+//     data.forEach(element => {
+//       addCard(element);
+//     })
+//   })
+//   .catch((err) => console.log(err))
+// };
+
+export function initializeCards(data) {
+  data.reverse();
+  data.forEach(element => {
+          addCard(element);
+        })
 };
 
 // Добавление сгенерированной карточки в контейнер
 export function addCard(data) {
   const card = generateCard(data);
-  cardsContainer.append(card);
+  cardsContainer.prepend(card);
 }
 
 // Генерация карточки
@@ -38,7 +48,7 @@ function generateCard(data) {
   clickableImage.addEventListener("click", () => openPopupView(data.link, data.name));
   if (isLiked) {likeButton.classList.add("cards__like-button_active")};
   if (data.owner["_id"] !== userID) {deleteButton.remove()};
-  if (data.owner["_id"] === userID) {deleteButton.addEventListener("click", () => deleteCard(data["_id"]))}
+  if (data.owner["_id"] === userID) {deleteButton.addEventListener("click", () => deleteCard(data["_id"], cardElement))}
   cardsList[`${data["_id"]}`] = isLiked;
   return cardElement;
 };
@@ -46,11 +56,12 @@ function generateCard(data) {
 // Обработчик добавления карточки юзером
 export function handleAddCard(e) {
   e.preventDefault();
-  const button = e.currentTarget.querySelector(".popup__save-button");
+  // const button = e.currentTarget.querySelector(".popup__save-button");
+  const button = e.submitter;
   renderLoading(true, button);
   sendNewCard(inputCardName.value, inputCardSrc.value)
-    .then(() => {
-      initializeCards();
+    .then((data) => {
+      addCard(data);
       closePopup(e.target);
       e.target.reset();
     })

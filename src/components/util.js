@@ -1,4 +1,4 @@
-import { getUserInfo, sendLike } from "./api.js";
+import { getInitialCards, getUserInfo, sendLike } from "./api.js";
 import { profileAvatar, profileDescription, profileName, setUserID, cardsList, popupConfirmDeletion, elementConfirmationForm, setCardForDeletion } from "./constants.js";
 import { initializeCards } from "./card.js";
 import { openPopup, handleConfirmCardDeletion } from "./modal.js";
@@ -21,18 +21,15 @@ export function like(cardID, likeButton, likesCounter) {
       likesCounter.textContent = data.likes.length;
       likeButton.classList.toggle("cards__like-button_active");
       cardsList[`${cardID}`] = !cardsList[`${cardID}`];
-    });
+    })
+    .catch(err => console.log(err));
 };
 
 // Удаление карточки
-export function deleteCard(cardID) {
-  // requestCardDeletion(cardID).then(() => initializeCards());
+export function deleteCard(cardID, card) {
   setCardForDeletion(cardID);
-  elementConfirmationForm.addEventListener("submit", handleConfirmCardDeletion)
+  elementConfirmationForm.addEventListener("submit", (evt) => handleConfirmCardDeletion(evt, card))
   openPopup(popupConfirmDeletion);
-  // DeletePromise
-  // .then(() => console.log("Удалил через промис"))
-  // .catch(() => console.log("Отменил удаление"));
 };
 
 
@@ -48,15 +45,13 @@ export function renderUserInfo(data) {
 // Первичная отрисовка информации пользователя
 
 export function initializePageContent() {
-  getUserInfo()
-    .then((data) => {
-      renderUserInfo(data);
-      setUserID(data["_id"]);
-      initializeCards();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+  Promise.all([getUserInfo(), getInitialCards()])
+  .then(([userData, cards]) => {
+    renderUserInfo(userData);
+    setUserID(userData["_id"]);
+    initializeCards(cards);
+  })
+  .catch(err => console.log(err))
+}
 
 

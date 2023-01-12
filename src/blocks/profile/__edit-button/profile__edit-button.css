@@ -1,5 +1,6 @@
 .profile__edit-button {
   grid-area: button;
+  padding: 0;
   box-sizing: border-box;
   width: 24px;
   height: 24px;
@@ -8,6 +9,7 @@
   background-repeat: no-repeat;
   background-position: center;
   align-self: baseline;
+  -webkit-appearance: none;
 }
 
 @media screen and (max-width: 440px) {
