@@ -1,4 +1,4 @@
-import { inputName, profileName, inputDescription, profileDescription, popupViewSrc, popupEdit, popupViewCaption, popupView, inputAvatarSrc, cardForDeletion, elementConfirmationForm } from "./constants.js";
+import { inputName, profileName, inputDescription, profileDescription, popupViewSrc, popupEdit, popupViewCaption, popupView, inputAvatarSrc, cardForDeletion } from "./constants.js";
 import { sendAvatar, sendUserInfo, requestCardDeletion } from "./api.js";
 import { renderLoading, renderUserInfo } from "./util.js";
 
@@ -47,7 +47,6 @@ export function openEditPopup() {
 
 // Открытие попапа добавления карточки
 export function openAddPopup(popupAdd) {
-  // elementsAddFormInputs.forEach((input) => simulateInput(input));
   openPopup(popupAdd);
 }
 
@@ -62,10 +61,8 @@ export function handleProfileFormSubmit(e) {
       renderUserInfo(data)
       closePopup(e.target);
     })
-    .catch((err) => {
-      console.log(err);
-   })
-    .finally(() => renderLoading(false, button, "Сохранить"));
+    .catch(console.error)
+    .finally(() => renderLoading(false, button));
 }
 
 // Обработчик кнопки "Сохранить" формы смены аватара
@@ -79,20 +76,17 @@ export function handleChangeAvatar(e) {
     closePopup(e.target);
     e.target.reset();
   })
-  .catch((err) => {
-    console.log(err);
- })
-  .finally(() => renderLoading(false, button, "Сохранить"));
+  .catch(console.error)
+  .finally(() => renderLoading(false, button));
 };
 
 // Обработчик подтверждения удаления карточки
 export function handleConfirmCardDeletion(e) {
   e.preventDefault();
-  requestCardDeletion(cardForDeletion[0])
+  requestCardDeletion(cardForDeletion.cardId)
   .then(() => {
-    cardForDeletion[1].remove()
+    cardForDeletion.card.remove()
     closePopup(e.target);
-    elementConfirmationForm.removeEventListener("submit", handleConfirmCardDeletion);
   })
-  .catch(err => console.log(err))
+  .catch(console.error)
 }

@@ -1,8 +1,8 @@
 import '../pages/index.css';
 import { enableValidation } from "./validate.js";
-import { elementAvatarEditForm, popupChangeAvatar, profileAvatar, buttonEdit, closingButtons, popupAdd, buttonAddCard, elementEditForm, elementAddForm, popupOverlays, popupContainers, validationConfig, setUserID } from "./constants.js";
+import { elementAvatarEditForm, popupChangeAvatar, profileAvatar, buttonEdit, closingButtons, popupAdd, buttonAddCard, elementEditForm, elementAddForm, popupOverlays, popupContainers, validationConfig, setUserID, elementConfirmationForm } from "./constants.js";
 import { handleAddCard, initializeCards } from "./card.js";
-import { closePopup, openEditPopup, handleProfileFormSubmit, openAddPopup, openPopup, handleChangeAvatar } from "./modal.js";
+import { closePopup, openEditPopup, handleProfileFormSubmit, openAddPopup, openPopup, handleChangeAvatar, handleConfirmCardDeletion } from "./modal.js";
 import { getUserInfo, getInitialCards } from './api.js';
 import { renderUserInfo } from './util.js';
 
@@ -14,6 +14,7 @@ buttonAddCard.addEventListener("click", () => {
   openAddPopup(popupAdd);
 });
 profileAvatar.addEventListener("click", () => {openPopup(popupChangeAvatar)});
+elementConfirmationForm.addEventListener("submit", handleConfirmCardDeletion);
 
 Promise.all([getUserInfo(), getInitialCards()])
 .then(([userData, cards]) => {

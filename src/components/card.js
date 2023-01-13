@@ -1,20 +1,7 @@
 import { renderLoading } from "./util.js";
-import { cardsContainer, inputCardSrc, inputCardName, cardTemplate, userID, cardsList, setCardForDeletion, elementConfirmationForm, popupConfirmDeletion } from "./constants.js";
-import { openPopupView, closePopup, openPopup, handleConfirmCardDeletion } from "./modal.js";
+import { cardsContainer, inputCardSrc, inputCardName, cardTemplate, userID, cardsList, setCardForDeletion, popupConfirmDeletion } from "./constants.js";
+import { openPopupView, closePopup, openPopup } from "./modal.js";
 import { sendLike, sendNewCard } from "./api.js";
-
-// Первичное заполнение страницы карточками из массива
-// export function initializeCards() {
-//   cardsContainer.innerHTML = "";
-//   getInitialCards()
-//   .then(data => {
-//     data.reverse();
-//     data.forEach(element => {
-//       addCard(element);
-//     })
-//   })
-//   .catch((err) => console.log(err))
-// };
 
 export function initializeCards(data) {
   data.reverse();
@@ -26,10 +13,6 @@ export function addCard(data) {
   const card = generateCard(data);
   cardsContainer.prepend(card);
 }
-
-// Генерация карточки
-// generateCard (imageSrc,     imageTitle,      likes,      cardOwnerID,           cardID)
-// addCard      (element.link, element.name, element.likes, element.owner["_id"], element["_id"]);
 
 function generateCard(data) {
   const cardElement = cardTemplate.querySelector(".cards__item").cloneNode(true);
@@ -54,18 +37,19 @@ function generateCard(data) {
 // Обработчик добавления карточки юзером
 export function handleAddCard(e) {
   e.preventDefault();
-  // const button = e.currentTarget.querySelector(".popup__save-button");
   const button = e.submitter;
   renderLoading(true, button);
   sendNewCard(inputCardName.value, inputCardSrc.value)
     .then((data) => {
       addCard(data);
       closePopup(e.target);
-      renderLoading(false, button, "Создать")
       e.target.reset();
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, button, "Создать")
    })
 };
 
@@ -88,7 +72,6 @@ export function like(cardID, likeButton, likesCounter) {
 // Удаление карточки
 export function deleteCard(cardID, card) {
   setCardForDeletion(cardID, card);
-  elementConfirmationForm.addEventListener("submit", handleConfirmCardDeletion)
   openPopup(popupConfirmDeletion);
 };
 

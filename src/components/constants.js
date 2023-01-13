@@ -13,8 +13,8 @@ export const profileDescription = document.querySelector(".profile__description"
 export let userID = "";
 export const setUserID = (val) => {userID = val};
 export const cardsList = {};
-export let cardForDeletion = [];
-export const setCardForDeletion = (cardId, card) => {cardForDeletion[0]=cardId; cardForDeletion[1]=card};
+export const cardForDeletion = {};
+export const setCardForDeletion = (cardId, card) => {cardForDeletion.cardId=cardId; cardForDeletion.card=card};
 export const elementEditForm = document.forms["edit-profile"];
 export const elementAddForm = document.forms["add-card"];
 export const elementAvatarEditForm = document.forms["change-avatar"];

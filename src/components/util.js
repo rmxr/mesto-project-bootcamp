@@ -3,7 +3,7 @@ import { profileAvatar, profileDescription, profileName } from "./constants.js";
 
 // Надпись "Сохранить..." во время ожидания ответа сервера
 
-export function renderLoading(isLoading, button, origText){
+export function renderLoading(isLoading, button, origText="Сохранить"){
   if (isLoading){
     button.textContent = "Сохранение...";
   } else {
