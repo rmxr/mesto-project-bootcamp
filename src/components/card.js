@@ -1,7 +1,7 @@
-import { like, deleteCard, renderLoading } from "./util.js";
-import { cardsContainer, inputCardSrc, inputCardName, cardTemplate, userID, cardsList } from "./constants.js";
-import { openPopupView, closePopup } from "./modal.js";
-import { getInitialCards, sendNewCard } from "./api.js";
+import { renderLoading } from "./util.js";
+import { cardsContainer, inputCardSrc, inputCardName, cardTemplate, userID, cardsList, setCardForDeletion, elementConfirmationForm, popupConfirmDeletion } from "./constants.js";
+import { openPopupView, closePopup, openPopup, handleConfirmCardDeletion } from "./modal.js";
+import { sendLike, sendNewCard } from "./api.js";
 
 // Первичное заполнение страницы карточками из массива
 // export function initializeCards() {
@@ -18,9 +18,7 @@ import { getInitialCards, sendNewCard } from "./api.js";
 
 export function initializeCards(data) {
   data.reverse();
-  data.forEach(element => {
-          addCard(element);
-        })
+  data.forEach(addCard)
 };
 
 // Добавление сгенерированной карточки в контейнер
@@ -63,17 +61,35 @@ export function handleAddCard(e) {
     .then((data) => {
       addCard(data);
       closePopup(e.target);
+      renderLoading(false, button, "Создать")
       e.target.reset();
     })
     .catch((err) => {
       console.log(err);
    })
-    .finally(() => renderLoading(false, button, "Создать"))
 };
 
 // Проверка на лайкнутость
 function checkIfLiked(likes){
   return likes.some(user => user["_id"] === userID)
+};
+
+// Обработчик лайков
+export function like(cardID, likeButton, likesCounter) {
+  sendLike(cardsList[`${cardID}`], cardID)
+    .then(data => {
+      likesCounter.textContent = data.likes.length;
+      likeButton.classList.toggle("cards__like-button_active");
+      cardsList[`${cardID}`] = !cardsList[`${cardID}`];
+    })
+    .catch(err => console.log(err));
+};
+
+// Удаление карточки
+export function deleteCard(cardID, card) {
+  setCardForDeletion(cardID, card);
+  elementConfirmationForm.addEventListener("submit", handleConfirmCardDeletion)
+  openPopup(popupConfirmDeletion);
 };
 
 

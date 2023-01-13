@@ -1,4 +1,4 @@
-import { inputName, profileName, inputDescription, profileDescription, popupViewSrc, popupEdit, popupViewCaption, popupView, elementsAddFormInputs, inputAvatarSrc, cardForDeletion, elementConfirmationForm } from "./constants.js";
+import { inputName, profileName, inputDescription, profileDescription, popupViewSrc, popupEdit, popupViewCaption, popupView, inputAvatarSrc, cardForDeletion, elementConfirmationForm } from "./constants.js";
 import { sendAvatar, sendUserInfo, requestCardDeletion } from "./api.js";
 import { renderLoading, renderUserInfo } from "./util.js";
 
@@ -55,7 +55,7 @@ export function openAddPopup(popupAdd) {
 // Обработчик кнопки "Сохранить" редактора профиля
 export function handleProfileFormSubmit(e) {
   e.preventDefault();
-  const button = e.currentTarget.querySelector(".popup__save-button");
+  const button = e.submitter;
   renderLoading(true, button)
   sendUserInfo(`${inputName.value}`, `${inputDescription.value}`)
     .then((data) => {
@@ -71,7 +71,7 @@ export function handleProfileFormSubmit(e) {
 // Обработчик кнопки "Сохранить" формы смены аватара
 export function handleChangeAvatar(e) {
   e.preventDefault();
-  const button = e.currentTarget.querySelector(".popup__save-button");
+  const button = e.submitter;
   renderLoading(true, button);
   sendAvatar(`${inputAvatarSrc.value}`)
   .then((data) => {
@@ -86,11 +86,11 @@ export function handleChangeAvatar(e) {
 };
 
 // Обработчик подтверждения удаления карточки
-export function handleConfirmCardDeletion(e, card) {
+export function handleConfirmCardDeletion(e) {
   e.preventDefault();
-  requestCardDeletion(cardForDeletion)
+  requestCardDeletion(cardForDeletion[0])
   .then(() => {
-    card.remove()
+    cardForDeletion[1].remove()
     closePopup(e.target);
     elementConfirmationForm.removeEventListener("submit", handleConfirmCardDeletion);
   })
